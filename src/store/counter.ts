@@ -7,26 +7,20 @@ interface CounterState {
 }
 
 const fetchCount = () => {
-  return new Promise((resolve, reject) =>
+  return new Promise((resolve) =>
     setTimeout(() => {
-      resolve("Hello");
+      resolve(null);
     }, 1000)
   );
 };
 
-export const increaseAsync = createAsyncThunk(
-  "counter/increase_async",
-  async () => {
-    return fetchCount();
-  }
-);
+export const increaseAsync = createAsyncThunk("counter/increase_async", () => {
+  return fetchCount();
+});
 
-export const decreaseAsync = createAsyncThunk(
-  "counter/decrease_async",
-  async () => {
-    return fetchCount();
-  }
-);
+export const decreaseAsync = createAsyncThunk("counter/decrease_async", () => {
+  return fetchCount();
+});
 
 const initialState: CounterState = {
   value: 0,
