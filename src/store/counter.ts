@@ -1,9 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+interface CounterState {
+  value: number;
+  isLoading: boolean;
+  errorMessage: string;
+}
+
 const fetchCount = () => {
   return new Promise((resolve, reject) =>
     setTimeout(() => {
-      resolve(null);
+      resolve("Hello");
     }, 1000)
   );
 };
@@ -22,7 +28,7 @@ export const decreaseAsync = createAsyncThunk(
   }
 );
 
-const initialState = {
+const initialState: CounterState = {
   value: 0,
   isLoading: false,
   errorMessage: "",
@@ -42,7 +48,6 @@ const counter = createSlice({
     }),
   },
   extraReducers: (builder) => {
-    // @ts-ignore
     builder
       .addCase(increaseAsync.pending, (state) => ({
         ...state,
@@ -66,7 +71,7 @@ const counter = createSlice({
         isLoading: false,
         value: state.value - 1,
       }))
-      .addCase(decreaseAsync.rejected, (state, action) => ({
+      .addCase(decreaseAsync.rejected, (state) => ({
         ...state,
         isLoading: false,
       }));
